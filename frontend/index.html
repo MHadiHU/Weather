@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmosphere — Local Weather</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-climate="neutral">
+    <main class="canvas">
+        <header class="top-bar">
+            <span class="brand-mark">Atmosphere</span>
+            <form class="search-box" id="searchForm" novalidate>
+                <label for="cityInput" class="sr-only">City name</label>
+                <input 
+                    type="text" 
+                    id="cityInput" 
+                    placeholder="Search a city, like Kabul or Kyoto..." 
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <button type="submit" id="searchBtn" aria-label="Search weather">
+                    <span>Check</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </form>
+        </header>
+
+        <!-- Directional Empty State -->
+        <section id="emptyState" class="status-panel">
+            <h1 class="prompt-heading">Where are you looking today?</h1>
+            <p class="prompt-sub">Type any city above to read its current temperature and sky conditions.</p>
+        </section>
+
+        <!-- Directional Error State -->
+        <section id="errorMessage" class="error-panel hidden" role="alert"></section>
+
+        <!-- Hero Weather Readout (No nested generic cards) -->
+        <article id="weatherCard" class="weather-stage hidden" aria-live="polite">
+            <div class="location-meta">
+                <h1 id="cityName" class="city-heading">—</h1>
+                <p id="observedTime" class="time-note">Updated just now</p>
+            </div>
+
+            <div class="hero-reading">
+                <div class="temp-display">
+                    <span id="temperature" class="temp-number">0</span><span class="temp-unit">°C</span>
+                </div>
+                <div class="condition-summary">
+                    <p id="description" class="condition-text">—</p>
+                    <p id="comfortNote" class="comfort-note">—</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

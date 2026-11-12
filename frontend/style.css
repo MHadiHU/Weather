@@ -1,0 +1,264 @@
+:root {
+    --surface-base: #F6F7F5;
+    --surface-elevated: rgba(255, 255, 255, 0.72);
+    --ink-strong: #14181C;
+    --ink-soft: #4F5861;
+    --accent-primary: #1B4D3E;
+    --accent-hover: #13382D;
+    --rule-hairline: rgba(20, 24, 28, 0.12);
+    --ambient-glow: radial-gradient(circle at 80% 15%, rgba(27, 77, 62, 0.08), transparent 55%);
+}
+
+/* Dynamic climate mood shifts based on API temperature */
+body[data-climate="cold"] {
+    --ambient-glow: radial-gradient(circle at 80% 15%, rgba(37, 99, 235, 0.14), transparent 60%);
+    --accent-primary: #1D4ED8;
+    --accent-hover: #1E40AF;
+}
+
+body[data-climate="mild"] {
+    --ambient-glow: radial-gradient(circle at 80% 15%, rgba(16, 185, 129, 0.14), transparent 60%);
+    --accent-primary: #0F766E;
+    --accent-hover: #115E59;
+}
+
+body[data-climate="warm"] {
+    --ambient-glow: radial-gradient(circle at 80% 15%, rgba(217, 119, 6, 0.16), transparent 60%);
+    --accent-primary: #B45309;
+    --accent-hover: #92400E;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--surface-base);
+    background-image: var(--ambient-glow);
+    color: var(--ink-strong);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    transition: background-image 0.6s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.canvas {
+    width: 100%;
+    max-width: 560px;
+}
+
+/* Top Navigation & Search */
+.top-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule-hairline);
+}
+
+.brand-mark {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--ink-strong);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--surface-elevated);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--rule-hairline);
+    border-radius: 999px;
+    padding: 6px 6px 6px 20px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(27, 77, 62, 0.1);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--ink-strong);
+    outline: none;
+    min-width: 0;
+}
+
+.search-box input::placeholder {
+    color: var(--ink-soft);
+}
+
+.search-box button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 22px;
+    background-color: var(--accent-primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.search-box button:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+}
+
+.search-box button:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.search-box button:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+/* Empty & Error Guidance States */
+.status-panel {
+    padding: 48px 0 24px;
+}
+
+.prompt-heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.prompt-sub {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 44ch;
+    line-height: 1.5;
+}
+
+.error-panel {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border-left: 3px solid #B91C1C;
+    background: rgba(185, 28, 28, 0.06);
+    color: #991B1B;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Hero Weather Readout */
+.weather-stage {
+    padding-top: 36px;
+    animation: stageRise 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes stageRise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.location-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.city-heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.25rem, 6vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+}
+
+.time-note {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
+
+.hero-reading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-hairline);
+}
+
+.temp-display {
+    display: flex;
+    align-items: flex-start;
+    font-variant-numeric: tabular-nums;
+    line-height: 0.9;
+}
+
+.temp-number {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(5rem, 16vw, 7.5rem);
+    letter-spacing: -0.04em;
+    color: var(--ink-strong);
+}
+
+.temp-unit {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    margin-left: 4px;
+}
+
+.condition-summary {
+    text-align: right;
+    padding-bottom: 8px;
+}
+
+.condition-text {
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--ink-strong);
+    margin-bottom: 4px;
+}
+
+.comfort-note {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .condition-summary {
+        text-align: left;
+    }
+}
