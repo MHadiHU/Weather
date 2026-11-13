@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://weather-frontend-five.vercel.app")
 public class HealthController {
 
     // Let Spring inject it. Don't use 'new'!
