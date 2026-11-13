@@ -28,7 +28,7 @@ async function getWeather() {
     searchBtn.querySelector('span').innerText = "Checking";
 
     try {
-        const response = await fetch(`http://localhost:8080/api/weather?city=${encodeURIComponent(city)}`);
+        const response = await fetch(`https://weather-r9a7.onrender.com/api/weather?city=${city}`);
         const data = await response.json();
 
         emptyState.classList.add('hidden');
