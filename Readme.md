@@ -35,5 +35,5 @@ A full-stack weather application built with **Spring Boot** and **Vanilla JavaSc
 ### Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/weather-app.git
+   git clone https://github.com/MHadiHU/Weather.git
    cd weather-app
