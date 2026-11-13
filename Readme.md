@@ -37,3 +37,10 @@ A full-stack weather application built with **Spring Boot** and **Vanilla JavaSc
    ```bash
    git clone https://github.com/MHadiHU/Weather.git
    cd weather-app
+
+# 🌤️ Spring Boot Weather API & Dashboard
+
+🔴 **Live Demo:** [Click here to view the app!](https://your-vercel-url.vercel.app)
+⚙️ **Backend API:** [Click here to test the API!](https://your-render-url.onrender.com/api/weather?city=London)
+
+> *Note: The backend is hosted on Render's free tier, so the first request may take 30 seconds to wake up the server.*
